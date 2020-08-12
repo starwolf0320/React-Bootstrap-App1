@@ -1,5 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import { prodcuts } from './products';
+import Product from './components/Product';
 
 function App() {
   return (
@@ -16,7 +18,18 @@ function App() {
           </Navbar.Collapse>
         </Navbar>
       </header>
-      <main>Product List</main>
+      <main>
+        <Container fluid>
+          <h1>Featured Products</h1>
+          <Row>
+            {prodcuts.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={3}>
+                <Product product={product}></Product>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </main>
       <footer>
         <Container>
           <Row>

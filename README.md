@@ -15,3 +15,10 @@
    13. footer
    14. create Container, Row, Col, copyright
    15. Update style.css to se min-height for main
+2. List Products
+   1. create an array of products in products.js
+   2. copy some images (680x830) in images folder in public folder
+   3. create Product.js component
+   4. show product name from props
+   5. Use Product component in App.js by creating map() over products
+   6. complete Product component to show the products
