@@ -1,4 +1,3 @@
-
 1. Create React Bootstrap App
    1. create mern-marketplace folder
    2. npx create-react-app frontend
@@ -22,3 +21,14 @@
    4. show product name from props
    5. Use Product component in App.js by creating map() over products
    6. complete Product component to show the products
+3. Create Rating Component
+   1. create components/Rating.js
+   2. link to fontawesome.css in index.html
+   3. create div.rating
+   4. define Rating object with render()
+   5. if !props.value return empty div
+   6. else use fa fa-star, fa-star-half-o and fa-star-o
+   7. last span for props.text || ''
+   8. style div.rating, span and last span
+   9. Edit Product component
+   10. Use Rating component
