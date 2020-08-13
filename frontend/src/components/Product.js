@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import Rating from './Rating';
 
 export default function Product(props) {
   const { product } = props;
@@ -13,7 +14,10 @@ export default function Product(props) {
           <Card.Title as="strong">{product.name}</Card.Title>
         </a>
         <Card.Text as="div">
-          {product.rating} from {product.numReviews} reviews
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} reviews`}
+          ></Rating>
         </Card.Text>
         <Card.Text as="h2">${product.price}</Card.Text>
       </Card.Body>
