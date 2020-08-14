@@ -43,6 +43,8 @@ export default function ProductScreen(props) {
                     <strong>${product.price}</strong>
                   </Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
                   <Col>
