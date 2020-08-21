@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     _id: '1',
     name: 'Fila Kids Disruptor Ii Repeat Big Sneaker',

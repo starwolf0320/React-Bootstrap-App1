@@ -1,5 +1,5 @@
-const express = require('express');
-const products = require('./products');
+import express from 'express';
+import products from './products';
 const app = express();
 app.get('/api/products', (req, res) => {
   res.send(products);
