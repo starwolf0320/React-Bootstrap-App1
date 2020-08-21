@@ -51,3 +51,11 @@
    8. create route for /api/products
    9. return products
    10. run npm start
+6. Load Products From Backend
+   1. edit HomeScreen.js
+   2. define products, loading and error.
+   3. create useEffect
+   4. define async fetchData and call it
+   5. install axios
+   6. get data from /api/products
+   7. show them in the list
