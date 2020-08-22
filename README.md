@@ -66,3 +66,10 @@
    4. set start: nodemon --watch backend --exec babel-node backend/server.js
    5. convert require to import in server.js
    6. npm start
+8. Install ESlint For Code Linting
+   1. npm install -D eslint
+   2. install VSCode eslint extension
+   3. Set VSCode setting for eslint
+   4. Install prettier extension
+   5. npm install -D eslint-config-prettier
+   6. Add extends: "prettier"
