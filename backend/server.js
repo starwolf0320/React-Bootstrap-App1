@@ -3,6 +3,7 @@ import products from './products';
 
 const app = express();
 app.get('/api/products', (req, res) => {
+  // res.status(500).send({ message: 'Can not get products' });
   res.send(products);
 });
 app.get('/', (req, res) => res.send('Server is ready.'));
