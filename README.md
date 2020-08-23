@@ -84,3 +84,7 @@
    8. const dispatch = useDispatch()
    9. useEffect(()=>dispatch({type: LOAD_PRODUCTS, payload: data})
    10. Add store to index.js
+10. Show Loading and Message Box
+    1. Create Loading Component
+    2. Create Message Box Component
+    3. Use them in HomeScreen
