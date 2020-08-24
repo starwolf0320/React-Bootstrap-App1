@@ -101,3 +101,10 @@
     2. add reducer to store.js
     3. use action in CartScreen.js
     4. render cartItems.length
+14. Design Cart Screen
+    2. create 2 columns for cart items and cart action
+    3. cartItems.length === 0 ? cart is empty
+    4. show item image, name, qty and price
+    5. cart action
+    6. Subtotal
+    7. Proceed to Checkout button

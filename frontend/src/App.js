@@ -29,7 +29,7 @@ function App() {
           </Navbar>
         </header>
         <main>
-          <Container fluid>
+          <Container fluid className="py-3">
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
