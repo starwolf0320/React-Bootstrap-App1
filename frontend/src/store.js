@@ -11,7 +11,10 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
 });
-const initialState = {};
+const cartItems = localStorage.getItem('cartItems')
+  ? JSON.parse(localStorage.getItem('cartItems'))
+  : [];
+const initialState = { cart: { cartItems } };
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
