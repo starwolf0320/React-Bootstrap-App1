@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import {
   Card,
   ListGroup,
@@ -29,7 +29,7 @@ export default function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const removeFromCartHandler = (id) => {
-    // dispatch delete actions
+    dispatch(removeFromCart(id));
   };
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
