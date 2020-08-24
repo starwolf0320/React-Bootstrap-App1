@@ -108,3 +108,7 @@
     5. cart action
     6. Subtotal
     7. Proceed to Checkout button
+15. Implement Remove From Cart Action
+    1. create removeFromCart constants, actions and reducers
+    2. add reducer to store.js
+    3. use action in CartScreen.js
