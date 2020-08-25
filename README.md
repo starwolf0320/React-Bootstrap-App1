@@ -112,3 +112,7 @@
     1. create removeFromCart constants, actions and reducers
     2. add reducer to store.js
     3. use action in CartScreen.js
+16. Switch From Babel To Native Node
+    1. Update node
+    2. Update package.json
+    3. Add .js to imports
