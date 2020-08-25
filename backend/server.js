@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
 import express from 'express';
-import products from './products';
+import products from './products.js';
 
 const app = express();
 
