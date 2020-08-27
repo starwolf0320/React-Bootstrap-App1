@@ -1,21 +1,22 @@
 import express from 'express';
-import products from './products.js';
+import mongoose from 'mongoose';
+import config from './config.js';
+import userRouter from './routers/userRouter.js';
+import productRouter from './routers/productRouter.js';
 
 const app = express();
+mongoose
+  .connect(config.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('DB Connected.'))
+  .catch((error) => console.log(error.reason));
 
-app.get('/api/products/:id', (req, res) => {
-  const product = products.find((x) => x._id === req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: 'Product Not Found' });
-  }
-});
-app.get('/api/products', (req, res) => {
-  // res.status(500).send({ message: 'Can not get products' });
-  res.send(products);
-});
+app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
 app.get('/', (req, res) => res.send('Server is ready.'));
-app.listen(process.env.PORT || 5000, () => {
+app.listen(config.PORT, () => {
   console.log(`server started at http://localhost:${process.env.PORT || 5000}`);
 });

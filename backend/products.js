@@ -1,6 +1,5 @@
 export default [
   {
-    _id: '1',
     name: 'Fila Kids Disruptor Ii Repeat Big Sneaker',
     image: '/images/p1.jpg', // 680 x 830
     description: 'best shoes',
@@ -12,7 +11,6 @@ export default [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: "PUMA Women's Tazon 5 Cross-Training Shoe",
     image: '/images/p2.jpg',
     description: 'best shoes',
@@ -24,7 +22,6 @@ export default [
     numReviews: 12,
   },
   {
-    _id: '3',
     name: "Under Armour Men's Sway Running Shoe",
     image: '/images/p3.jpg',
     description: 'best shoes',
@@ -36,7 +33,6 @@ export default [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: "New Balance Women's Fresh Foam 1165 V1 Walking Shoe",
     image: '/images/p4.jpg',
     description: 'best shoes',
@@ -48,7 +44,6 @@ export default [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Converse Chuck Taylor All Star High Top Sneaker',
     image: '/images/p5.jpg',
     description: 'best shoes',
@@ -60,7 +55,6 @@ export default [
     numReviews: 12,
   },
   {
-    _id: '6',
     name: "PUMA Men's Tazon 6 FM Running Shoe",
     image: '/images/p6.jpg',
     description: 'best shoes',
