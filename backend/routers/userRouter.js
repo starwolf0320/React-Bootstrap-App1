@@ -1,9 +1,11 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
+import bcrypt from 'bcryptjs';
 import User from '../models/userModel.js';
 import users from '../users.js';
 import products from '../products.js';
 import Product from '../models/productModel.js';
+import { generateToken } from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -22,6 +24,27 @@ userRouter.get(
     );
     const createdProducts = await Product.insertMany(sampleProducts);
     res.send({ users: createdUsers, products: createdProducts });
+  })
+);
+userRouter.post(
+  '/signin',
+  expressAsyncHandler(async (req, res) => {
+    const signedinUser = await User.findOne({ email: req.body.email });
+    if (
+      signedinUser &&
+      bcrypt.compareSync(req.body.password, signedinUser.password)
+    ) {
+      res.send({
+        _id: signedinUser._id,
+        name: signedinUser.name,
+        email: signedinUser.email,
+        isAdmin: signedinUser.isAdmin,
+        isSeller: signedinUser.isSeller,
+        token: generateToken(signedinUser),
+      });
+    } else {
+      res.status(401).send({ message: 'Invalid email or password' });
+    }
   })
 );
 export default userRouter;

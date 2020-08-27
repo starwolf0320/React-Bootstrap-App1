@@ -1,10 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import config from './config.js';
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 
 const app = express();
+app.use(bodyParser.json());
 mongoose
   .connect(config.MONGODB_URL, {
     useNewUrlParser: true,

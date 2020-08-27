@@ -128,3 +128,6 @@
     9. create productSchema and productModel
     10. create userRoute
     11. Seed sample data
+18. Create Sign-in Backend
+    1. create API for /api/users/signin
+    2. create isAuth middleware
