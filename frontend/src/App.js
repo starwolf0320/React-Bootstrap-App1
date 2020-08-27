@@ -5,6 +5,7 @@ import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import SigninScreen from './screens/SigninScreen';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Container fluid className="py-3">
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen}></Route>
+            <Route path="/signin" component={SigninScreen} exact></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>
