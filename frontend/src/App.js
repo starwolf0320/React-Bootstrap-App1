@@ -1,13 +1,22 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import { Navbar, Nav, Container, Row, Col, NavDropdown } from 'react-bootstrap';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
+import { useSelector, useDispatch } from 'react-redux';
+import { signout } from './actions/userActions';
 
 function App() {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const dispatch = useDispatch();
+  const handleSignout = () => {
+    dispatch(signout());
+    document.location.href = '/';
+  };
   return (
     <BrowserRouter>
       <div>
@@ -22,9 +31,20 @@ function App() {
                 <LinkContainer to="/cart">
                   <Nav.Link>Cart</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/signin">
-                  <Nav.Link>Sign In</Nav.Link>
-                </LinkContainer>
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id="usermenu">
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={handleSignout}>
+                      Sign Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <LinkContainer to="/signin">
+                    <Nav.Link>Sign In</Nav.Link>
+                  </LinkContainer>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Navbar>

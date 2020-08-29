@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
+import { signin } from '../actions/userActions';
+import { useEffect } from 'react';
 
-export default function SigninScreen() {
+export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(signin(email, password));
   };
+  const redirect = props.location.search
+    ? props.location.search.split('=')[1]
+    : '/';
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [userInfo]);
+  const dispatch = useDispatch();
   return (
     <FormContainer>
       <h1> Sign In</h1>
