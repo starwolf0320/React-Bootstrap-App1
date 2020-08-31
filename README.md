@@ -101,13 +101,7 @@
     2. add reducer to store.js
     3. use action in CartScreen.js
     4. render cartItems.length
-14. Design Cart Screen
-    2. create 2 columns for cart items and cart action
-    3. cartItems.length === 0 ? cart is empty
-    4. show item image, name, qty and price
-    5. cart action
-    6. Subtotal
-    7. Proceed to Checkout button
+14. Design Cart Screen 2. create 2 columns for cart items and cart action 3. cartItems.length === 0 ? cart is empty 4. show item image, name, qty and price 5. cart action 6. Subtotal 7. Proceed to Checkout button
 15. Implement Remove From Cart Action
     1. create removeFromCart constants, actions and reducers
     2. add reducer to store.js
@@ -140,3 +134,11 @@
     1. create signin constants, actions and reducers
     2. add reducer to store.js
     3. use action in SigninScreen.js
+21. Create Register Backend and Design UI
+    1. create API for /api/users/register
+    2. insert new user to database
+    3. return user info and token
+    4. create RegisterScreen
+    5. Add fields
+    6. Style fields
+    7. Add screen to App.js

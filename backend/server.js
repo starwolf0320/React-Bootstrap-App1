@@ -19,6 +19,9 @@ mongoose
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.get('/', (req, res) => res.send('Server is ready.'));
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
 app.listen(config.PORT, () => {
   console.log(`server started at http://localhost:${process.env.PORT || 5000}`);
 });
