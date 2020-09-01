@@ -8,6 +8,8 @@ import { cartReducer } from './reducers/cartReducers';
 import {
   userSigninReducer,
   userRegisterReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer,
 } from './reducers/userReducers';
 
 const reducer = combineReducers({
@@ -15,6 +17,8 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userSignin: userSigninReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
   userRegister: userRegisterReducer,
 });
 const userInfo = localStorage.getItem('userInfo')

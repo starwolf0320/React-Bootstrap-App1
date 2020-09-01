@@ -56,12 +56,12 @@ userRouter.put(
     const user = await User.findById(userId);
     if (user) {
       user.name = req.body.name || user.name;
-      user.email = req.body.name || user.email;
+      user.email = req.body.email || user.email;
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
       const updatedUser = await user.save();
-      res.status({
+      res.send({
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
