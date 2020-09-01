@@ -146,3 +146,8 @@
     1. create register constants, actions and reducers
     2. add reducer to store.js
     3. use action in RegisterScreen.js
+23. Create Profile Backend and Screen
+    1. create profile update api in backend
+    2. create isAuth in utils.js and use in update profile
+    3. create ProfileScreen.js
+    4. add form elements
