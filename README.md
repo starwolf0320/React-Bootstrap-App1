@@ -151,3 +151,10 @@
     2. create isAuth in utils.js and use in update profile
     3. create ProfileScreen.js
     4. add form elements
+24. Implement Profile Action
+    1. create user details constants, actions and reducers
+    2. add reducer to store.js
+    3. use action in ProfileScreen.js
+    4. create update profile constants, actions and reducers
+    5. add reducer to store.js
+    6. use action in ProfileScreen.js
