@@ -3,8 +3,10 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
-import { signin } from '../actions/userActions';
+import { register } from '../actions/userActions';
 import { useEffect } from 'react';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -17,23 +19,25 @@ export default function RegisterScreen(props) {
       alert('Passwords are not matched.');
       return;
     }
-    console.log('TODO: register action');
-    // dispatch(signin(email, password));
+
+    dispatch(register(name, email, password));
   };
   const redirect = props.location.search
     ? props.location.search.split('=')[1]
     : '/';
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
     }
-  }, [userInfo]);
+  }, [userInfo, redirect, props.history]);
   const dispatch = useDispatch();
   return (
     <FormContainer>
-      <h1> Register</h1>
+      <h1>Register</h1>
+      {loading && <LoadingBox />}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
@@ -70,7 +74,7 @@ export default function RegisterScreen(props) {
           ></Form.Control>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Sign In
+          Submit
         </Button>
       </Form>
       <Row className="py-3">

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { signin } from '../actions/userActions';
 import { useEffect } from 'react';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function SigninScreen(props) {
   const [email, setEmail] = useState('');
@@ -17,7 +19,7 @@ export default function SigninScreen(props) {
     ? props.location.search.split('=')[1]
     : '/';
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const { userInfo, loading, error } = userSignin;
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -27,6 +29,8 @@ export default function SigninScreen(props) {
   return (
     <FormContainer>
       <h1> Sign In</h1>
+      {loading && <LoadingBox />}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>

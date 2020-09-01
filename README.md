@@ -142,3 +142,7 @@
     5. Add fields
     6. Style fields
     7. Add screen to App.js
+22. Implement Register Action
+    1. create register constants, actions and reducers
+    2. add reducer to store.js
+    3. use action in RegisterScreen.js
