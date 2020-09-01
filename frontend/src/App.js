@@ -9,6 +9,7 @@ import SigninScreen from './screens/SigninScreen';
 import { useSelector, useDispatch } from 'react-redux';
 import { signout } from './actions/userActions';
 import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -56,6 +57,7 @@ function App() {
             <Route path="/product/:id" component={ProductScreen}></Route>
             <Route path="/signin" component={SigninScreen} exact></Route>
             <Route path="/register" component={RegisterScreen} exact></Route>
+            <Route path="/profile" component={ProfileScreen} exact></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>
