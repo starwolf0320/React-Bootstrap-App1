@@ -163,3 +163,8 @@
     2. create div elements for step 1 to 4
     3. handle redirect in signin and register
     4. create shipping screen
+26. Implement Checkout Wizard Action
+    1. saveShippingAddress constant, reducer and actions
+    2. copy shipping screen and as payment screen
+    3. define getPayment and setPayment
+    4. redirect user to PlaceOrder.js
