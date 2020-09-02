@@ -79,7 +79,10 @@ export default function RegisterScreen(props) {
       </Form>
       <Row className="py-3">
         <Col>
-          Already have an account? <Link to="/signin">Sign In</Link>
+          Already have an account?{' '}
+          <Link to={redirect ? `/signin?redirect=${redirect}` : '/signin'}>
+            Sign In
+          </Link>
         </Col>
       </Row>
     </FormContainer>
