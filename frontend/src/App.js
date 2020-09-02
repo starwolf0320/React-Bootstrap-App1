@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signout } from './actions/userActions';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -55,9 +56,10 @@ function App() {
           <Container fluid className="py-3">
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen}></Route>
-            <Route path="/signin" component={SigninScreen} exact></Route>
-            <Route path="/register" component={RegisterScreen} exact></Route>
-            <Route path="/profile" component={ProfileScreen} exact></Route>
+            <Route path="/signin" component={SigninScreen}></Route>
+            <Route path="/register" component={RegisterScreen}></Route>
+            <Route path="/profile" component={ProfileScreen}></Route>
+            <Route path="/shipping" component={ShippingAddressScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

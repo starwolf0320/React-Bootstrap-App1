@@ -158,3 +158,8 @@
     4. create update profile constants, actions and reducers
     5. add reducer to store.js
     6. use action in ProfileScreen.js
+25. Design Checkout Wizard Screen
+    1. create CheckoutSteps.js
+    2. create div elements for step 1 to 4
+    3. handle redirect in signin and register
+    4. create shipping screen
