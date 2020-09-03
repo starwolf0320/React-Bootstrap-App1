@@ -27,7 +27,13 @@ const userInfo = localStorage.getItem('userInfo')
 const cartItems = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : [];
-const initialState = { cart: { cartItems }, userSignin: { userInfo } };
+const shippingAddress = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : {};
+const initialState = {
+  cart: { cartItems, shippingAddress },
+  userSignin: { userInfo },
+};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
