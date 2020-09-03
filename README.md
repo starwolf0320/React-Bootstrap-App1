@@ -168,3 +168,8 @@
     2. copy shipping screen and as payment screen
     3. define getPayment and setPayment
     4. redirect user to PlaceOrder.js
+27. Create Place Order API
+    1. createOrder api
+    2. create orderModel
+    3. create orderRouter
+    4. create post order route
