@@ -173,3 +173,10 @@
     2. create orderModel
     3. create orderRouter
     4. create post order route
+28. Design PlaceOrder Screen
+    1. create CartScreen.js
+    2. Add checkout wizard
+    3. Add shipping, payment and items preview
+    4. Add Place Order button
+    5. handle place order button click
+    6. create place order action and reducer
