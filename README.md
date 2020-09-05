@@ -178,5 +178,6 @@
     2. Add checkout wizard
     3. Add shipping, payment and items preview
     4. Add Place Order button
-    5. handle place order button click
-    6. create place order action and reducer
+29. Implement PlaceOrder Action
+    1. handle place order button click
+    2. create place order constants, action and reducer

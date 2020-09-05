@@ -25,7 +25,7 @@ export const isAuth = (req, res, next) => {
     const token = auth.slice(7, auth.length);
     jwt.verify(token, config.JWT_SECRET, (err, decode) => {
       if (err) {
-        res.status(401).send({ message: 'Invalid' });
+        res.status(401).send({ message: 'Invalid Token' });
       } else {
         req.user = decode;
         next();
