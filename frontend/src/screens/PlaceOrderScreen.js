@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Row,
   Col,
@@ -12,13 +12,35 @@ import {
 } from 'react-bootstrap';
 import CheckoutSteps from '../components/CheckoutSteps';
 import MessageBox from '../components/MessageBox';
+import { createOrder } from '../actions/orderActions';
 
-export default function PlaceOrderScreen() {
+export default function PlaceOrderScreen(props) {
   const cart = useSelector((state) => state.cart);
   cart.itemsPrice = cart.cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 10;
   cart.taxPrice = (0.15 * cart.itemsPrice).toFixed(2);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  const dispatch = useDispatch();
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
+  };
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { success, order, error } = orderCreate;
+  useEffect(() => {
+    if (success) {
+      props.history.push(`/order/${order._id}`);
+    }
+  }, [success]);
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -101,10 +123,17 @@ export default function PlaceOrderScreen() {
                   <Col>${cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {error && (
+                <ListGroup.Item>
+                  <MessageBox variant="danger">{error}</MessageBox>
+                </ListGroup.Item>
+              )}
+
               <ListGroup.Item>
                 <Button
                   type="button"
                   className="btn-block"
+                  onClick={placeOrderHandler}
                   disabled={cart.cartItems.length === 0}
                 >
                   Place Order
