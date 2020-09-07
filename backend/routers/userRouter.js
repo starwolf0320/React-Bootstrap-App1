@@ -5,10 +5,18 @@ import User from '../models/userModel.js';
 import users from '../users.js';
 import products from '../products.js';
 import Product from '../models/productModel.js';
-import { generateToken, isAuth } from '../utils.js';
+import { generateToken, isAuth, isAdmin } from '../utils.js';
 
 const userRouter = express.Router();
-
+userRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const userList = await User.find({});
+    res.send(userList);
+  })
+);
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {

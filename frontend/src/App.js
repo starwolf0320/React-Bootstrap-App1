@@ -14,6 +14,7 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -51,6 +52,13 @@ function App() {
                     <Nav.Link>Sign In</Nav.Link>
                   </LinkContainer>
                 )}
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown title="Admin" id="adminmenu">
+                    <LinkContainer to="/userlist">
+                      <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Navbar>
@@ -66,6 +74,7 @@ function App() {
             <Route path="/payment" component={PaymentMethodScreen}></Route>
             <Route path="/placeorder" component={PlaceOrderScreen}></Route>
             <Route path="/order/:id" component={OrderScreen}></Route>
+            <Route path="/userlist" component={UserListScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>
