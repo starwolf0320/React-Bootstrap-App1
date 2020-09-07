@@ -205,3 +205,7 @@
     2. create api for getMyOrders
     3. show orders in profile screen
     4. style orders
+34. List Users
+    1. build api for list users
+    2. Create UserList Screen
+    3. create order details constant, action and reducer
