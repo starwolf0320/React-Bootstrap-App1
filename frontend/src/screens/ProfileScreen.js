@@ -45,7 +45,7 @@ export default function ProfileScreen(props) {
 
   useEffect(() => {
     if (!user.name) {
-      dispatch(detailsUser(userSignin.userInfo._id));
+      dispatch(detailsUser('mine'));
       dispatch(listOrdersMine());
     } else {
       setName(user.name);

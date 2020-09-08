@@ -31,6 +31,7 @@ userRouter.delete(
     }
   })
 );
+
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
@@ -97,11 +98,44 @@ userRouter.put(
 );
 
 userRouter.get(
+  '/mine',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      res.send(user);
+    } else {
+      res.status(404).send({ message: 'User Not Found' });
+    }
+  })
+);
+userRouter.get(
   '/:id',
+  isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
       res.send(user);
+    } else {
+      res.status(404).send({ message: 'User Not Found' });
+    }
+  })
+);
+
+userRouter.put(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      user.name = req.body.name;
+      user.email = req.body.email;
+      user.isAdmin = req.body.isAdmin;
+      user.isSeller = req.body.isSeller;
+      const updatedUser = await user.save();
+      res.send({ message: 'User Updated', user: updatedUser });
     } else {
       res.status(404).send({ message: 'User Not Found' });
     }

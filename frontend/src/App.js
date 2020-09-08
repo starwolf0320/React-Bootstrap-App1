@@ -15,6 +15,7 @@ import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -75,6 +76,7 @@ function App() {
             <Route path="/placeorder" component={PlaceOrderScreen}></Route>
             <Route path="/order/:id" component={OrderScreen}></Route>
             <Route path="/userlist" component={UserListScreen}></Route>
+            <Route path="/user/:id/edit" component={UserEditScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

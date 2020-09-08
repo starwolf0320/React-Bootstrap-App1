@@ -47,7 +47,7 @@ export default function UserListScreen() {
               <td>{user.isSller ? 'YES' : 'NO'}</td>
               <td>{user.isAdmin ? 'YES' : 'NO'}</td>
               <td>
-                <LinkContainer to={`/user/${user._id}`}>
+                <LinkContainer to={`/user/${user._id}/edit`}>
                   <Button variant="light" className="btn-sm">
                     Edit
                   </Button>
