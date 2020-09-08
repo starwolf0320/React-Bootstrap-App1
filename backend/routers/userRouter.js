@@ -17,6 +17,20 @@ userRouter.get(
     res.send(userList);
   })
 );
+userRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      const deletedUser = await user.remove();
+      res.send({ message: 'User Deleted', user: deletedUser });
+    } else {
+      res.status(404).send({ message: 'User Not Found' });
+    }
+  })
+);
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
