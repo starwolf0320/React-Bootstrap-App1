@@ -4,18 +4,22 @@ import MessageBox from '../components/MessageBox';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Button, Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { listUsers } from '../actions/userActions';
+import { listUsers, deleteUser } from '../actions/userActions';
 
 export default function UserListScreen() {
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listUsers());
-  }, []);
+  }, [successDelete]);
   const deleteHandler = (user) => {
     if (window.confirm('Are you sure')) {
-      // TO DO: dispatch delete action
+      dispatch(deleteUser(user._id));
     }
   };
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
   return (
