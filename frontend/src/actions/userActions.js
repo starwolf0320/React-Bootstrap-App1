@@ -80,10 +80,17 @@ export const signin = (email, password) => async (dispatch) => {
     });
   }
 };
-export const detailsUser = (userId) => async (dispatch) => {
+export const detailsUser = (userId) => async (dispatch, getState) => {
   try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
     dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
-    const { data } = await axios.get(`/api/users/${userId}`);
+    const { data } = await axios.get(`/api/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
