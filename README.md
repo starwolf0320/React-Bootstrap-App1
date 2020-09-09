@@ -216,3 +216,8 @@
 36. Edit User API and Screen
     1. build api for details and update users
     2. create edit screen UI
+37. Edit User Action
+    1. define user details constant, action and reducer
+    2. show user info in edit screen
+    3. define user update constant, action and reducer
+    4. update user info in edit screen

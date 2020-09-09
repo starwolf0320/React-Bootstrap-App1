@@ -19,6 +19,9 @@ import {
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_FAIL,
+  USER_UPDATE_SUCCESS,
 } from '../constants/userConstants';
 
 export const deleteUser = (userId) => async (dispatch, getState) => {
@@ -80,6 +83,29 @@ export const signin = (email, password) => async (dispatch) => {
     });
   }
 };
+
+export const updateUser = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_UPDATE_REQUEST, payload: user });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    const { data } = await axios.put(`/api/users/${user._id}`, user, {
+      headers: { Authorization: `bearer ${userInfo.token}` },
+    });
+    dispatch({ type: USER_UPDATE_SUCCESS, payload: data.user });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const detailsUser = (userId) => async (dispatch, getState) => {
   try {
     const {
