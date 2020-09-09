@@ -44,7 +44,7 @@ export default function UserListScreen() {
               <td>{user._id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.isSller ? 'YES' : 'NO'}</td>
+              <td>{user.isSeller ? 'YES' : 'NO'}</td>
               <td>{user.isAdmin ? 'YES' : 'NO'}</td>
               <td>
                 <LinkContainer to={`/user/${user._id}/edit`}>
