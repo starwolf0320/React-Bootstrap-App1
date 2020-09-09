@@ -16,6 +16,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import ProductListScreen from './screens/ProductListScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -55,6 +56,9 @@ function App() {
                 )}
                 {userInfo && userInfo.isAdmin && (
                   <NavDropdown title="Admin" id="adminmenu">
+                    <LinkContainer to="/productlist">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
                     <LinkContainer to="/userlist">
                       <NavDropdown.Item>Users</NavDropdown.Item>
                     </LinkContainer>
@@ -77,6 +81,7 @@ function App() {
             <Route path="/order/:id" component={OrderScreen}></Route>
             <Route path="/userlist" component={UserListScreen}></Route>
             <Route path="/user/:id/edit" component={UserEditScreen}></Route>
+            <Route path="/productlist" component={ProductListScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

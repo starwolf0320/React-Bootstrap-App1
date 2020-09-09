@@ -221,3 +221,7 @@
     2. show user info in edit screen
     3. define user update constant, action and reducer
     4. update user info in edit screen
+38. List Products
+    1. Create ProductList Screen
+    2. Add to route
+    3. use product list action
