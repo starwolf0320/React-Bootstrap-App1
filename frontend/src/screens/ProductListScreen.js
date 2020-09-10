@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../actions/productActions';
+import { listProducts, deleteProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -10,15 +10,25 @@ export default function ProductListScreen() {
   const createProduct = () => {
     // TODO: create product
   };
-  const deleteHandler = () => {
-    // TODO: delete product
+  const deleteHandler = (product) => {
+    if (window.confirm('Are you sure?')) {
+      dispatch(deleteProduct(product._id));
+    }
   };
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    success: successDelete,
+    loading: loadingDelete,
+    error: errorDelete,
+  } = productDelete;
+
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts({}));
-  }, []);
+  }, [successDelete]);
   return (
     <>
       <Row className="align-items-center">
@@ -29,7 +39,8 @@ export default function ProductListScreen() {
           <Button onClick={createProduct}>Create Product</Button>
         </Col>
       </Row>
-
+      {loadingDelete && <LoadingBox></LoadingBox>}
+      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

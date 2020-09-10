@@ -225,3 +225,7 @@
     1. Create ProductList Screen
     2. Add to route
     3. use product list action
+39. Delete Products
+    1. build api for delete products
+    2. create product delete constant, action and reducer
+    3. Use action in ProductListScreen
