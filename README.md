@@ -229,3 +229,6 @@
     1. build api for delete products
     2. create product delete constant, action and reducer
     3. Use action in ProductListScreen
+40. Build Product Create and Update API
+    1. build api for delete products
+    1. build api for delete products
