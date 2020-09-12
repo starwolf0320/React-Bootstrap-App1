@@ -232,3 +232,6 @@
 40. Build Product Create and Update API
     1. build api for delete products
     1. build api for delete products
+41. Create Product Action
+    1. define product create constant, action and reducer
+    2. use action in Product List Screen

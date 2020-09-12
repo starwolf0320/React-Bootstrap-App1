@@ -2,13 +2,20 @@ import React, { useEffect } from 'react';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts, deleteProduct } from '../actions/productActions';
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
-export default function ProductListScreen() {
-  const createProduct = () => {
-    // TODO: create product
+export default function ProductListScreen(props) {
+  const dispatch = useDispatch();
+
+  const createHandler = () => {
+    dispatch(createProduct());
   };
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure?')) {
@@ -25,10 +32,23 @@ export default function ProductListScreen() {
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
-  const dispatch = useDispatch();
+
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    success: successCreate,
+    loading: loadingCreate,
+    error: errorCreate,
+    product: createdProduct,
+  } = productCreate;
+
   useEffect(() => {
-    dispatch(listProducts({}));
-  }, [successDelete]);
+    if (successCreate) {
+      dispatch({ type: PRODUCT_CREATE_RESET });
+      props.history.push(`/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts({}));
+    }
+  }, [successDelete, successCreate]);
   return (
     <>
       <Row className="align-items-center">
@@ -36,9 +56,11 @@ export default function ProductListScreen() {
           <h1>Products</h1>
         </Col>
         <Col className="text-right">
-          <Button onClick={createProduct}>Create Product</Button>
+          <Button onClick={createHandler}>Create Product</Button>
         </Col>
       </Row>
+      {loadingCreate && <LoadingBox></LoadingBox>}
+      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
