@@ -9,6 +9,9 @@ import {
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
+  PRODUCT_CREATE_FAIL,
+  PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_SUCCESS,
 } from '../constants/productConstants';
 
 export const listProducts = () => async (dispatch) => {
@@ -26,6 +29,34 @@ export const listProducts = () => async (dispatch) => {
     });
   }
 };
+
+export const createProduct = () => async (dispatch, getState) => {
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    dispatch({ type: PRODUCT_CREATE_REQUEST });
+    const { data } = await Axios.post(
+      '/api/products',
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${userInfo.token}`,
+        },
+      }
+    );
+    dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data.product });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const deleteProduct = (productId) => async (dispatch, getState) => {
   try {
     const {
