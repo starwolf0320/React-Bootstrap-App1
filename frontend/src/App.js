@@ -17,6 +17,7 @@ import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -72,6 +73,10 @@ function App() {
           <Container fluid className="py-3">
             <Route path="/cart/:id?" component={CartScreen}></Route>
             <Route path="/product/:id" component={ProductScreen} exact></Route>
+            <Route
+              path="/product/:id/edit"
+              component={ProductEditScreen}
+            ></Route>
             <Route path="/signin" component={SigninScreen}></Route>
             <Route path="/register" component={RegisterScreen}></Route>
             <Route path="/profile" component={ProfileScreen}></Route>

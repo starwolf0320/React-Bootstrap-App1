@@ -4,16 +4,11 @@
    3. npm start
    4. npm install react-bootstrap
    5. link bootstrap.css CDN to index.html
-   6. create <>
-   7. header
-   8. create Navbar, LinkContainer, Navbar.Brand
-   9. create Navbar.Toggle, Navbar.Collapse,
-   10. Nav, Nav.Link Cart and Nav.Link Sign In
-   11. main
-   12. create Container and sample content
-   13. footer
-   14. create Container, Row, Col, copyright
-   15. Update style.css to se min-height for main
+   6. create Navbar, LinkContainer, Navbar.Brand
+   7. create Navbar.Toggle, Navbar.Collapse,
+   8. create Container and sample content
+   9. create Container, Row, Col, copyright
+   10. Update style.css to se min-height for main
 2. List Products
    1. create an array of products in products.js
    2. copy some images (680x830) in images folder in public folder
@@ -101,7 +96,11 @@
     2. add reducer to store.js
     3. use action in CartScreen.js
     4. render cartItems.length
-14. Design Cart Screen 2. create 2 columns for cart items and cart action 3. cartItems.length === 0 ? cart is empty 4. show item image, name, qty and price 5. cart action 6. Subtotal 7. Proceed to Checkout button
+14. Design Cart Screen
+    1. create 2 columns for cart items and cart action
+    2. cartItems.length === 0 ? cart is empty
+    3. show item image, name, qty and price
+    4. Proceed to Checkout button
 15. Implement Remove From Cart Action
     1. create removeFromCart constants, actions and reducers
     2. add reducer to store.js
@@ -231,7 +230,11 @@
     3. Use action in ProductListScreen
 40. Build Product Create and Update API
     1. build api for delete products
-    1. build api for delete products
+    2. build api for delete products
 41. Create Product Action
     1. define product create constant, action and reducer
     2. use action in Product List Screen
+42. Create Product Edit Screen
+    1. create edit screen ui
+    2. define product details constant, action and reducer
+    3. use action in Product Edit Screen
