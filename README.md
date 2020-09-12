@@ -238,3 +238,6 @@
     1. create edit screen ui
     2. define product details constant, action and reducer
     3. use action in Product Edit Screen
+43. Implement Edit Product Action
+    1. define product update constant, action and reducer
+    2. use action in Product Edit Screen
