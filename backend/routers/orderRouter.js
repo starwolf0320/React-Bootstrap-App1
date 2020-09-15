@@ -1,9 +1,19 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAuth } from '../utils.js';
+import { isAdmin, isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
+
+orderRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate('user', '_id name');
+    res.send(orders);
+  })
+);
 
 orderRouter.get(
   '/mine',
@@ -48,6 +58,23 @@ orderRouter.put(
     }
   })
 );
+
+orderRouter.put(
+  '/:id/deliver',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+
+      const updatedOrder = await order.save();
+      res.send({ message: 'Order Delivered', order: updatedOrder });
+    }
+  })
+);
+
 orderRouter.post(
   '/',
   isAuth,

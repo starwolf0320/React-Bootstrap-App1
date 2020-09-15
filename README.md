@@ -257,3 +257,13 @@
     13. call uploadProductImage()
     14. create uploadProductImage in api.js
     15. update server.js
+45. Admin Orders
+    1. create Admin Order menu in header
+    2. create AdminOrder.js
+    3. load orders from backend
+    4. list them in the screen
+    5. show delete and edit button
+    6. redirect to order details
+    7. if order is payed show deliver button for admin
+    8. handle click on deliver button
+    9. set state to delivered

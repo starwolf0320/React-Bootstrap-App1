@@ -12,6 +12,12 @@ import {
   ORDER_MINE_LIST_FAIL,
   ORDER_MINE_LIST_REQUEST,
   ORDER_MINE_LIST_SUCCESS,
+  ORDER_LIST_REQUEST,
+  ORDER_LIST_SUCCESS,
+  ORDER_LIST_FAIL,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_FAIL,
 } from '../constants/orderConstants';
 import { CART_EMPTY } from '../constants/cartConstants';
 import Axios from 'axios';
@@ -44,6 +50,31 @@ export const payOrder = (order, paymentResult) => async (
   }
 };
 
+export const deliverOrder = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_DELIVER_REQUEST, payload: order });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/deliver`,
+      {},
+      {
+        headers: { Authorization: `bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DELIVER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const listOrdersMine = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
@@ -57,6 +88,27 @@ export const listOrdersMine = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_MINE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_LIST_REQUEST });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    const { data } = await axios.get('/api/orders', {
+      headers: { Authorization: `bearer ${userInfo.token}` },
+    });
+    dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
