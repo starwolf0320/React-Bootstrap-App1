@@ -1,10 +1,12 @@
 import express from 'express';
+import path from 'path';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import config from './config.js';
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 import orderRouter from './routers/orderRouter.js';
+import uploadRouter from './routers/uploadRouter.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -19,10 +21,13 @@ mongoose
 
 app.use('/api/orders', orderRouter);
 app.use('/api/products', productRouter);
+app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.get('/api/config/paypal', (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);
 });
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.get('/', (req, res) => res.send('Server is ready.'));
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

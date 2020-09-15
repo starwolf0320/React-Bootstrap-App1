@@ -241,3 +241,19 @@
 43. Implement Edit Product Action
     1. define product update constant, action and reducer
     2. use action in Product Edit Screen
+44. Upload Product Image
+    1. npm install multer
+    2. create routes/uploadRoute.js
+    3. import express and multer
+    4. create disk storage with Date.now().jpg as filename
+    5. set upload as multer({ storage })
+    6. router.post('/', upload.single('image'))
+    7. app.use('/api/uploads',uploadRoute) in server.js
+    8. create uploads folder and put empty file.txt there.
+    9. ProductEditScreen.js
+    10. create file input and set id to image-file
+    11. handle image-file change
+    12. create form data
+    13. call uploadProductImage()
+    14. create uploadProductImage in api.js
+    15. update server.js
