@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import Axios from 'axios';
 
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
+  const [uploading, setUploading] = useState(false);
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState('');
@@ -61,6 +63,27 @@ export default function ProductEditScreen(props) {
       setDescription(product.description);
     }
   }, [product, successUpdate]);
+
+  const uploadFileHandler = (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+    Axios.post('/api/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then((response) => {
+        setImage(response.data);
+        setUploading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setUploading(false);
+      });
+  };
+
   return (
     <FormContainer>
       <h1>Edit Product {productId}</h1>
@@ -98,6 +121,13 @@ export default function ProductEditScreen(props) {
               value={image}
               onChange={(e) => setImage(e.target.value)}
             ></Form.Control>
+            <Form.File
+              id="image-file"
+              label="Choose Image"
+              custom
+              onChange={uploadFileHandler}
+            ></Form.File>
+            {uploading && <LoadingBox />}
           </Form.Group>
           <Form.Group controlId="brand">
             <Form.Label>Brand</Form.Label>
