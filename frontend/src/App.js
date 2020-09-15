@@ -18,6 +18,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import OrderListScreen from './screens/OrderListScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -60,6 +61,9 @@ function App() {
                     <LinkContainer to="/productlist">
                       <NavDropdown.Item>Products</NavDropdown.Item>
                     </LinkContainer>
+                    <LinkContainer to="/orderlist">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
                     <LinkContainer to="/userlist">
                       <NavDropdown.Item>Users</NavDropdown.Item>
                     </LinkContainer>
@@ -87,6 +91,7 @@ function App() {
             <Route path="/userlist" component={UserListScreen}></Route>
             <Route path="/user/:id/edit" component={UserEditScreen}></Route>
             <Route path="/productlist" component={ProductListScreen}></Route>
+            <Route path="/orderlist" component={OrderListScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>
