@@ -13,7 +13,7 @@ export default function HomeScreen() {
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listProducts({}));
   }, []);
   return (
     <>

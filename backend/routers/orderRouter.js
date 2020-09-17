@@ -1,16 +1,17 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
-import { isAdmin, isAuth } from '../utils.js';
+import { isAdmin, isAuth, isSeller } from '../utils.js';
 
 const orderRouter = express.Router();
 
 orderRouter.get(
   '/',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({}).populate('user', '_id name');
+    const seller = req.query.seller ? { seller: req.query.seller } : {};
+    const orders = await Order.find({ ...seller }).populate('user', '_id name');
     res.send(orders);
   })
 );
@@ -85,6 +86,7 @@ orderRouter.post(
       const order = new Order({
         orderItems: req.body.orderItems,
         user: req.user._id,
+        seller: req.body.orderItems[0].seller,
         shippingAddress: req.body.shippingAddress,
         paymentMethod: req.body.paymentMethod,
         itemsPrice: req.body.itemsPrice,

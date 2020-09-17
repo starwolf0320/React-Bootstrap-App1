@@ -267,3 +267,8 @@
     7. if order is payed show deliver button for admin
     8. handle click on deliver button
     9. set state to delivered
+46. Implement Seller View
+    1. add seller menu
+    2. list products for seller
+    3. list orders for seller
+    4. add Seller to Product List and Details Screen

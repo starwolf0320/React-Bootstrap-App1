@@ -12,6 +12,7 @@ import MessageBox from '../components/MessageBox';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const dispatch = useDispatch();
 
   const createHandler = () => {
@@ -29,7 +30,8 @@ export default function ProductListScreen(props) {
     loading: loadingDelete,
     error: errorDelete,
   } = productDelete;
-
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -46,7 +48,7 @@ export default function ProductListScreen(props) {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push(`/product/${createdProduct._id}/edit`);
     } else {
-      dispatch(listProducts({}));
+      dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
     }
   }, [successDelete, successCreate]);
   return (
@@ -73,6 +75,7 @@ export default function ProductListScreen(props) {
             <tr>
               <th>ID</th>
               <th>NAME</th>
+              <th>SELLER</th>
               <th>PRICE</th>
               <th>CATEGORY</th>
               <th>BRAND</th>
@@ -84,6 +87,7 @@ export default function ProductListScreen(props) {
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
+                <td>{product.seller.seller.name}</td>
                 <td>{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>

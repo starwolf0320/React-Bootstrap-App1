@@ -63,6 +63,14 @@ export default function ProductScreen(props) {
             <Card>
               <ListGroup variant="flush">
                 <ListGroup.Item>
+                  Seller
+                  <h2>{product.seller.seller.name}</h2>
+                  <Rating
+                    value={product.seller.seller.rating}
+                    text={`${product.seller.seller.numReviews} reviews`}
+                  ></Rating>
+                </ListGroup.Item>
+                <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
                     <Col>
