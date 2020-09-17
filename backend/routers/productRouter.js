@@ -1,14 +1,14 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, isSeller } from '../utils.js';
 
 const productRouter = express.Router();
 
 productRouter.post(
   '/',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: 'Sample Name',
@@ -32,7 +32,7 @@ productRouter.post(
 productRouter.put(
   '/:id',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -52,7 +52,11 @@ productRouter.put(
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const seller = req.query.seller ? { seller: req.query.seller } : {};
+    const products = await Product.find({ ...seller }).populate(
+      'seller',
+      '_id seller.name seller.logo seller.rating seller.numReviews'
+    );
     res.send(products);
   })
 );
@@ -60,7 +64,10 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      'seller',
+      '_id seller.name seller.logo seller.rating seller.numReviews'
+    );
     res.send(product);
   })
 );

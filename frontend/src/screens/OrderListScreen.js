@@ -7,13 +7,16 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function OrderListScreen(props) {
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const dispatch = useDispatch();
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
 
   useEffect(() => {
-    dispatch(listOrders({}));
+    dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
   }, []);
   return (
     <>

@@ -56,6 +56,16 @@ function App() {
                     <Nav.Link>Sign In</Nav.Link>
                   </LinkContainer>
                 )}
+                {userInfo && userInfo.isSeller && (
+                  <NavDropdown title="Seller" id="adminmenu">
+                    <LinkContainer to="/productlist/seller">
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/orderlist/seller">
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                )}
                 {userInfo && userInfo.isAdmin && (
                   <NavDropdown title="Admin" id="adminmenu">
                     <LinkContainer to="/productlist">
@@ -90,8 +100,17 @@ function App() {
             <Route path="/order/:id" component={OrderScreen}></Route>
             <Route path="/userlist" component={UserListScreen}></Route>
             <Route path="/user/:id/edit" component={UserEditScreen}></Route>
-            <Route path="/productlist" component={ProductListScreen}></Route>
-            <Route path="/orderlist" component={OrderListScreen}></Route>
+            <Route
+              path="/productlist/seller"
+              component={ProductListScreen}
+            ></Route>
+            <Route path="/orderlist/seller" component={OrderListScreen}></Route>
+            <Route
+              path="/productlist"
+              exact
+              component={ProductListScreen}
+            ></Route>
+            <Route path="/orderlist" exact component={OrderListScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

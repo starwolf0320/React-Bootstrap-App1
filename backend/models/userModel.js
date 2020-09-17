@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       logo: String,
       description: String,
       rating: { type: Number, default: 0 },
-      number: { type: Number, default: 0 },
+      numReviews: { type: Number, default: 0 },
     },
   },
   {
