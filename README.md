@@ -284,3 +284,7 @@
     3. handle submit form
     4. edit parse url to get query string
     5. update product list api for search keyword
+49. Review Products
+    1. create review form in product screen
+    2. Implement product review api
+    3. show reviews
