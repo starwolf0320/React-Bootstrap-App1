@@ -7,12 +7,18 @@ import { useEffect } from 'react';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { listOrdersMine } from '../actions/orderActions';
+import Axios from 'axios';
 
 export default function ProfileScreen(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [sellerName, setSellerName] = useState('');
+  const [sellerLogo, setSellerLogo] = useState('');
+  const [sellerDescription, setSellerDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const userSignin = useSelector((state) => state.userSignin);
   if (!userSignin.userInfo) {
@@ -39,10 +45,35 @@ export default function ProfileScreen(props) {
         email,
         name,
         password,
+        seller: user.isSeller
+          ? {
+              logo: sellerLogo,
+              name: sellerName,
+              description: sellerDescription,
+            }
+          : {},
       })
     );
   };
-
+  const uploadFileHandler = (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+    Axios.post('/api/uploads', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+      .then((response) => {
+        setSellerLogo(response.data);
+        setUploading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setUploading(false);
+      });
+  };
   useEffect(() => {
     if (!user.name) {
       dispatch(detailsUser('mine'));
@@ -50,6 +81,9 @@ export default function ProfileScreen(props) {
     } else {
       setName(user.name);
       setEmail(user.email);
+      setSellerName(user.seller ? user.seller.name : '');
+      setSellerLogo(user.seller ? user.seller.logo : '');
+      setSellerDescription(user.seller ? user.seller.description : '');
     }
   }, [user]);
   const dispatch = useDispatch();
@@ -97,6 +131,47 @@ export default function ProfileScreen(props) {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
+          {user.isSeller && (
+            <>
+              <h2>Seller</h2>
+
+              <Form.Group controlId="sellerName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter seller name"
+                  value={sellerName}
+                  onChange={(e) => setSellerName(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="sellerLogo">
+                <Form.Label>Logo</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter seller logo url"
+                  value={sellerLogo}
+                  onChange={(e) => setSellerLogo(e.target.value)}
+                ></Form.Control>
+                <Form.File
+                  id="image-file"
+                  label="Choose Logo"
+                  custom
+                  onChange={uploadFileHandler}
+                ></Form.File>
+                {uploading && <LoadingBox />}
+              </Form.Group>
+              <Form.Group controlId="sellerDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows="3"
+                  placeholder="Enter seller description"
+                  value={sellerDescription}
+                  onChange={(e) => setSellerDescription(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+            </>
+          )}
           <Button variant="primary" type="submit">
             Update
           </Button>

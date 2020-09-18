@@ -1,22 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Carousel, Image } from 'react-bootstrap';
 import Product from '../components/Product';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { Link } from 'react-router-dom';
+import { listTopSellers } from '../actions/userActions';
 // import { prodcuts } from '../products';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
+
+  const userTopSellers = useSelector((state) => state.userTopSellers);
+  const {
+    sellers,
+    loading: loadingSellers,
+    error: errorSellers,
+  } = userTopSellers;
   useEffect(() => {
     dispatch(listProducts({}));
+    dispatch(listTopSellers());
   }, []);
   return (
     <>
+      {loadingSellers ? (
+        <LoadingBox></LoadingBox>
+      ) : errorSellers ? (
+        <MessageBox variant="danger">{errorSellers}</MessageBox>
+      ) : (
+        <Carousel className="bg-dark">
+          {sellers.map((seller) => (
+            <Carousel.Item key={seller._id}>
+              <Link className="seller-image" to={`/seller/${seller._id}`}>
+                <Image
+                  className="seller-image"
+                  fuild
+                  src={seller.seller.logo}
+                />
+                <Carousel.Caption>
+                  <h2>{seller.seller.name}</h2>
+                </Carousel.Caption>
+              </Link>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      )}
       {loading ? (
         <LoadingBox />
       ) : error ? (

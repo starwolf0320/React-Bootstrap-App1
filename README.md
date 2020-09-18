@@ -272,3 +272,9 @@
     2. list products for seller
     3. list orders for seller
     4. add Seller to Product List and Details Screen
+47. Create Seller Profile, Page and Carousel
+    1. Add seller field to profile
+    2. show seller field if user is seller
+    3. upload seller logo
+    4. create seller page
+    5. show seller info and product
