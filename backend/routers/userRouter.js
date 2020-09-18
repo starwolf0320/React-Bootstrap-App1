@@ -17,6 +17,16 @@ userRouter.get(
     res.send(userList);
   })
 );
+userRouter.get(
+  '/top-sellers',
+  expressAsyncHandler(async (req, res) => {
+    const userList = await User.find({ isSeller: true })
+      .sort({ 'seller.rating': -1 })
+      .limit(3);
+
+    res.send(userList);
+  })
+);
 userRouter.delete(
   '/:id',
   isAuth,
@@ -80,6 +90,11 @@ userRouter.put(
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      if (user.isSeller) {
+        user.seller.name = req.body.seller.name;
+        user.seller.logo = req.body.seller.logo;
+        user.seller.description = req.body.seller.description;
+      }
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
@@ -111,8 +126,7 @@ userRouter.get(
 );
 userRouter.get(
   '/:id',
-  isAuth,
-  isAdmin,
+
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {

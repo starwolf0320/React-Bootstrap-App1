@@ -23,7 +23,11 @@ export default function Product(props) {
         <Card.Text as="div">
           <Row>
             <Col>{product.brand}</Col>
-            <Col className="text-right">{product.seller.seller.name}</Col>
+            <Col className="text-right">
+              <Link to={`/seller/${product.seller._id}`}>
+                {product.seller.seller.name}
+              </Link>
+            </Col>
           </Row>
         </Card.Text>
         <Card.Text as="h2">${product.price}</Card.Text>

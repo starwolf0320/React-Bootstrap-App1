@@ -16,3 +16,23 @@ h2 {
 .rating span:last-child {
   color: #444444;
 }
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  background-color: rgb(12, 12, 12, 0.5);
+}
+.carousel img {
+  height: 400px;
+  padding: 30px;
+}
+.carousel a {
+  margin: 0 auto;
+}
+.home-heading {
+  text-align: center;
+  padding-top: 20px;
+}

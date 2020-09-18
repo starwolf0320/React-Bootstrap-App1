@@ -23,6 +23,9 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  USER_TOPSELLERS_LIST_SUCCESS,
+  USER_TOPSELLERS_LIST_FAIL,
+  USER_TOPSELLERS_LIST_REQUEST,
 } from '../constants/userConstants';
 export const userDeleteReducer = (state = {}, action) => {
   switch (action.type) {
@@ -47,6 +50,19 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
       return { loading: false, error: action.payload };
     case USER_UPDATE_RESET:
       return { user: {} };
+    default:
+      return state;
+  }
+};
+
+export const userTopSellersReducer = (state = { sellers: [] }, action) => {
+  switch (action.type) {
+    case USER_TOPSELLERS_LIST_REQUEST:
+      return { loading: true, sellers: [] };
+    case USER_TOPSELLERS_LIST_SUCCESS:
+      return { loading: false, sellers: action.payload };
+    case USER_TOPSELLERS_LIST_FAIL:
+      return { loading: false, error: action.payload, users: [] };
     default:
       return state;
   }
@@ -92,7 +108,10 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 };
 
-export const userDetailsReducer = (state = { user: {} }, action) => {
+export const userDetailsReducer = (
+  state = { loading: true, user: {} },
+  action
+) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { ...state, loading: true };

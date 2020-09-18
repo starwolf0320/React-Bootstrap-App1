@@ -19,6 +19,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import SellerScreen from './screens/SellerScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -111,6 +112,8 @@ function App() {
               component={ProductListScreen}
             ></Route>
             <Route path="/orderlist" exact component={OrderListScreen}></Route>
+            <Route path="/seller/:id" exact component={SellerScreen}></Route>
+
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

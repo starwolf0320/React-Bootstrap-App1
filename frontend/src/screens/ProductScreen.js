@@ -64,7 +64,9 @@ export default function ProductScreen(props) {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   Seller
-                  <h2>{product.seller.seller.name}</h2>
+                  <Link to={`/seller/${product.seller._id}`}>
+                    <h2>{product.seller.seller.name}</h2>
+                  </Link>
                   <Rating
                     value={product.seller.seller.rating}
                     text={`${product.seller.seller.numReviews} reviews`}
