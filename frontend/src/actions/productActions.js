@@ -17,10 +17,14 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from '../constants/productConstants';
 
-export const listProducts = ({ seller = '' }) => async (dispatch) => {
+export const listProducts = ({ keyword = '', seller = '' }) => async (
+  dispatch
+) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await Axios.get(`/api/products?seller=${seller}`);
+    const { data } = await Axios.get(
+      `/api/products?seller=${seller}&keyword=${keyword}`
+    );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

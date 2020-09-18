@@ -278,3 +278,9 @@
     3. upload seller logo
     4. create seller page
     5. show seller info and product
+48. Search Products
+    1. create search bar in Header.js
+    2. add style
+    3. handle submit form
+    4. edit parse url to get query string
+    5. update product list api for search keyword

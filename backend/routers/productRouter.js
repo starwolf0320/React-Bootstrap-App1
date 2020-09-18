@@ -53,7 +53,15 @@ productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const seller = req.query.seller ? { seller: req.query.seller } : {};
-    const products = await Product.find({ ...seller }).populate(
+    const keyword = req.query.keyword
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: 'i',
+          },
+        }
+      : {};
+    const products = await Product.find({ ...seller, ...keyword }).populate(
       'seller',
       '_id seller.name seller.logo seller.rating seller.numReviews'
     );
