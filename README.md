@@ -288,3 +288,24 @@
     1. create review form in product screen
     2. Implement product review api
     3. show reviews
+50. Publish on heroku
+    1. Create git repository
+    2. Create heroku account
+    3. install Heroku CLI
+    4. heroku login
+    5. heroku apps:create <yourname>mernmp
+    6. Edit package.json for build script
+    7. `cd frontend && npm install && npm run build`
+    8. Edit package.json for node engines
+    9. `"engines": { "node": "12.4.0", "npm": "6.9.0" }`
+    10. Create Procfile
+    11. `web: node --experimental-modules backend/server.js`
+    12. Create mongodb atlas database
+    13. create MongoDB Account
+    14. open cloud.mongodb.com
+    15. add new user and save username and password
+    16. set Network Access to accept all requests
+    17. Create new database
+    18. create connection string based on db name and user and password
+    19. Set Cloud MongoDB connection in heroku env variables
+    20. Commit and push
