@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 import { listTopSellers } from '../actions/userActions';
 // import { prodcuts } from '../products';
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
+  const keyword = props.match.params.keyword;
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
@@ -22,33 +23,35 @@ export default function HomeScreen() {
     error: errorSellers,
   } = userTopSellers;
   useEffect(() => {
-    dispatch(listProducts({}));
+    dispatch(listProducts({ keyword }));
     dispatch(listTopSellers());
   }, []);
   return (
     <>
-      {loadingSellers ? (
-        <LoadingBox></LoadingBox>
-      ) : errorSellers ? (
-        <MessageBox variant="danger">{errorSellers}</MessageBox>
-      ) : (
-        <Carousel className="bg-dark">
-          {sellers.map((seller) => (
-            <Carousel.Item key={seller._id}>
-              <Link className="seller-image" to={`/seller/${seller._id}`}>
-                <Image
-                  className="seller-image"
-                  fuild
-                  src={seller.seller.logo}
-                />
-                <Carousel.Caption>
-                  <h2>{seller.seller.name}</h2>
-                </Carousel.Caption>
-              </Link>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      )}
+      {!keyword &&
+        (loadingSellers ? (
+          <LoadingBox></LoadingBox>
+        ) : errorSellers ? (
+          <MessageBox variant="danger">{errorSellers}</MessageBox>
+        ) : (
+          <Carousel className="bg-dark">
+            {sellers.map((seller) => (
+              <Carousel.Item key={seller._id}>
+                <Link className="seller-image" to={`/seller/${seller._id}`}>
+                  <Image
+                    className="seller-image"
+                    fuild
+                    src={seller.seller.logo}
+                  />
+                  <Carousel.Caption>
+                    <h2>{seller.seller.name}</h2>
+                  </Carousel.Caption>
+                </Link>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        ))}
+
       {loading ? (
         <LoadingBox />
       ) : error ? (

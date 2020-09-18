@@ -20,6 +20,7 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import SellerScreen from './screens/SellerScreen';
+import SearchBox from './components/SearchBox';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -38,7 +39,15 @@ function App() {
               <Navbar.Brand>MERN Marketplace</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="navbar-menu"></Navbar.Toggle>
-            <Navbar.Collapse id="navbar-menu" className="justify-content-end">
+            <Navbar.Collapse
+              id="navbar-menu"
+              className="justify-content-between"
+            >
+              <Route
+                render={({ history }) => (
+                  <SearchBox history={history}></SearchBox>
+                )}
+              ></Route>
               <Nav>
                 <LinkContainer to="/cart">
                   <Nav.Link>Cart</Nav.Link>
@@ -113,7 +122,7 @@ function App() {
             ></Route>
             <Route path="/orderlist" exact component={OrderListScreen}></Route>
             <Route path="/seller/:id" exact component={SellerScreen}></Route>
-
+            <Route path="/search/:keyword" component={HomeScreen}></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>
