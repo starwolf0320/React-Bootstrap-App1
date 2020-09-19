@@ -179,4 +179,29 @@ userRouter.post(
     }
   })
 );
+
+userRouter.post(
+  '/:id/reviews',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id).populate('seller');
+    if (user) {
+      const review = {
+        name: req.body.name,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
+      };
+      user.seller.reviews.push(review);
+      user.seller.numReviews = user.seller.reviews.length;
+      user.seller.rating =
+        user.seller.reviews.reduce((a, c) => c.rating + a, 0) /
+        user.seller.reviews.length;
+      await user.save();
+      res.status(201).send({ message: 'Review saved successfully' });
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  })
+);
+
 export default userRouter;
