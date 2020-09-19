@@ -18,6 +18,7 @@ import {
   userDeleteReducer,
   userUpdateReducer,
   userTopSellersReducer,
+  sellerReviewSaveReducer,
 } from './reducers/userReducers';
 import {
   orderCreateReducer,
@@ -50,6 +51,7 @@ const reducer = combineReducers({
   productCreate: productCreateReducer,
   productUpdate: productUpdateReducer,
   productReviewSave: productReviewSaveReducer,
+  sellerReviewSave: sellerReviewSaveReducer,
 });
 const userInfo = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

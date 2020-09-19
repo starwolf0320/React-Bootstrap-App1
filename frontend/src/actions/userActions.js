@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import axios from 'axios';
 import {
   USER_SIGNIN_REQUEST,
@@ -25,6 +26,9 @@ import {
   USER_TOPSELLERS_LIST_FAIL,
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_REQUEST,
+  SELLER_REVIEW_SAVE_REQUEST,
+  SELLER_REVIEW_SAVE_SUCCESS,
+  SELLER_REVIEW_SAVE_FAIL,
 } from '../constants/userConstants';
 
 export const deleteUser = (userId) => async (dispatch, getState) => {
@@ -198,4 +202,30 @@ export const register = (name, email, password) => async (dispatch) => {
 export const signout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_SIGNOUT });
+};
+
+export const updateSellerReview = (userId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    dispatch({ type: SELLER_REVIEW_SAVE_REQUEST });
+    const { data } = await Axios.post(`/api/users/${userId}/reviews`, review, {
+      headers: {
+        Authorization: `bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: SELLER_REVIEW_SAVE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: SELLER_REVIEW_SAVE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

@@ -309,3 +309,7 @@
     18. create connection string based on db name and user and password
     19. Set Cloud MongoDB connection in heroku env variables
     20. Commit and push
+51. Review Sellers
+    1. create review form in seller screen
+    2. Implement seller review api
+    3. show reviews

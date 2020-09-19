@@ -26,6 +26,10 @@ import {
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_FAIL,
   USER_TOPSELLERS_LIST_REQUEST,
+  SELLER_REVIEW_SAVE_REQUEST,
+  SELLER_REVIEW_SAVE_FAIL,
+  SELLER_REVIEW_SAVE_RESET,
+  SELLER_REVIEW_SAVE_SUCCESS,
 } from '../constants/userConstants';
 export const userDeleteReducer = (state = {}, action) => {
   switch (action.type) {
@@ -109,7 +113,7 @@ export const userRegisterReducer = (state = {}, action) => {
 };
 
 export const userDetailsReducer = (
-  state = { loading: true, user: {} },
+  state = { loading: true, user: { seller: { reviews: [] } } },
   action
 ) => {
   switch (action.type) {
@@ -134,6 +138,21 @@ export const userUpdateProfileReducer = (state = {}, action) => {
     case USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
 
+    default:
+      return state;
+  }
+};
+
+export const sellerReviewSaveReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SELLER_REVIEW_SAVE_REQUEST:
+      return { loading: true };
+    case SELLER_REVIEW_SAVE_SUCCESS:
+      return { loading: false, user: action.payload, success: true };
+    case SELLER_REVIEW_SAVE_FAIL:
+      return { loading: false, error: action.payload };
+    case SELLER_REVIEW_SAVE_RESET:
+      return {};
     default:
       return state;
   }
