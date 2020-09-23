@@ -20,13 +20,15 @@ import {
   PRODUCT_REVIEW_SAVE_FAIL,
 } from '../constants/productConstants';
 
-export const listProducts = ({ keyword = '', seller = '' }) => async (
-  dispatch
-) => {
+export const listProducts = ({
+  keyword = '',
+  seller = '',
+  pageNumber = '',
+}) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await Axios.get(
-      `/api/products?seller=${seller}&keyword=${keyword}`
+      `/api/products?seller=${seller}&keyword=${keyword}&pageNumber=${pageNumber}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
