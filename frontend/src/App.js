@@ -116,13 +116,23 @@ function App() {
             ></Route>
             <Route path="/orderlist/seller" component={OrderListScreen}></Route>
             <Route
-              path="/productlist"
+              path="/productlist/:pageNumber?"
               exact
               component={ProductListScreen}
             ></Route>
             <Route path="/orderlist" exact component={OrderListScreen}></Route>
             <Route path="/seller/:id" exact component={SellerScreen}></Route>
-            <Route path="/search/:keyword" component={HomeScreen}></Route>
+            <Route path="/search/:keyword" component={HomeScreen} exact></Route>
+            <Route
+              path="/page/:pageNumber"
+              component={HomeScreen}
+              exact
+            ></Route>
+            <Route
+              path="/search/:keyword/page/:pageNumber"
+              component={HomeScreen}
+              exact
+            ></Route>
             <Route path="/" component={HomeScreen} exact></Route>
           </Container>
         </main>

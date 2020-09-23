@@ -52,6 +52,8 @@ productRouter.put(
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
+    const pageSize = 2;
+    const page = Number(req.query.pageNumber) || 1;
     const seller = req.query.seller ? { seller: req.query.seller } : {};
     const keyword = req.query.keyword
       ? {
@@ -61,11 +63,15 @@ productRouter.get(
           },
         }
       : {};
-    const products = await Product.find({ ...seller, ...keyword }).populate(
-      'seller',
-      '_id seller.name seller.logo seller.rating seller.numReviews'
-    );
-    res.send(products);
+    const count = await Product.count({ ...seller, ...keyword });
+    const products = await Product.find({ ...seller, ...keyword })
+      .populate(
+        'seller',
+        '_id seller.name seller.logo seller.rating seller.numReviews'
+      )
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+    res.send({ products, page, pages: Math.ceil(count / pageSize) });
   })
 );
 

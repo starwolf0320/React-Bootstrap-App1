@@ -313,3 +313,8 @@
     1. create review form in seller screen
     2. Implement seller review api
     3. show reviews
+52. Add Pagination To Search Products
+    1. update productRouter
+    2. add paginate to HomeScreen and ProductList
+    3. update reducer and router
+    4. update app.js
